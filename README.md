@@ -17,5 +17,5 @@ Simply run:
 
 To use it:
 
-    $ graphql-schema-validator --help
+    $ graphql-schema-validator -s path_to/schema.file -q path_to/query.file
 
