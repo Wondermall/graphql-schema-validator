@@ -1,0 +1,20 @@
+query Stores {
+  job {
+    guides(includeHidden: false) {
+        pageInfo {
+            hasPreviousPage
+            hasNextPage
+            startCursor
+            endCursor
+        }
+        edges {
+            cursor,
+            node {
+                id
+                title
+                somethingElse
+            }
+        }
+    }
+  }
+}

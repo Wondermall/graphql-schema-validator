@@ -1,0 +1,10 @@
+query Users {
+    users {
+        edges {
+            cursor,
+            node {
+                id, uid, emailAddress
+            }
+        }
+    }
+}
