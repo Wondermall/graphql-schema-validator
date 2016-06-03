@@ -1,0 +1,70 @@
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+type Character implements Node, NdbNode {
+  id: ID!
+  name: String
+}
+
+type Faction implements Node, NdbNode {
+  id: ID!
+  ships(keysOnly: Boolean, batchSize: Int, pageSize: Int, before: String, after: String, first: Int, last: Int): ShipNdbConnection
+  hero: Character
+  name: String
+}
+
+input IntroduceShipInput {
+  clientMutationId: String!
+  shipName: String!
+  factionId: String!
+}
+
+type IntroduceShipPayload {
+  clientMutationId: String!
+  ship: Ship
+  faction: Faction
+}
+
+type Mutation {
+  introduceShip(input: IntroduceShipInput!): IntroduceShipPayload
+}
+
+interface NdbNode {
+  id: ID!
+}
+
+interface Node {
+  id: ID!
+}
+
+type PageInfo {
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+  hasNextPage: Boolean!
+}
+
+type Query {
+  rebels: Faction
+  empire: Faction
+  node(id: ID): Node
+  ships(keysOnly: Boolean, batchSize: Int, pageSize: Int, before: String, after: String, first: Int, last: Int): ShipNdbConnection
+}
+
+type Ship implements Node, NdbNode {
+  id: ID!
+  name: String
+  faction: Faction
+}
+
+type ShipEdge {
+  cursor: String!
+  node: Ship
+}
+
+type ShipNdbConnection {
+  pageInfo: PageInfo!
+  edges: [ShipEdge]
+}
