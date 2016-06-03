@@ -3,7 +3,7 @@ GraphQL Schema Validator
 """
 from setuptools import find_packages, setup
 
-dependencies = ['click']
+dependencies = ['click', 'graphql-core']
 
 setup(
     name='gqlschemavalidator',
